@@ -119,7 +119,7 @@ const Login = ( {onLoginOrSignup} ) => {
                 <button type="submit" className="login-button">Login</button>
             </div>
             <div>
-            Already have an account? <Link to="/login" role="menuitem">Sign Up</Link>
+            Already have an account? <Link to="/" role="menuitem">Sign Up</Link>
             </div>
             </form>
         </div>
