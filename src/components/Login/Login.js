@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import '../Signup/Signup.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../App';
 
 const Login = ( {onLoginOrSignup} ) => {
@@ -119,7 +119,7 @@ const Login = ( {onLoginOrSignup} ) => {
                 <button type="submit" className="login-button">Login</button>
             </div>
             <div>
-            Already have an account? <a href='/'>Sign Up</a>
+            Already have an account? <Link to="/login" role="menuitem">Sign Up</Link>
             </div>
             </form>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Signup.css'; // Make sure this file exists and is in the same directory
 import axios from 'axios'; // Import Axios
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../App';
 
 
@@ -197,7 +197,7 @@ const Signup = ( {onLoginOrSignup}  ) => {
                 <button type="submit" className="signup-button">Sign Up</button>
             </div>
             <div>
-            Already have an account? <a href='login'>Login</a>
+            Already have an account? <Link to="/login" role="menuitem">Login</Link>
             </div>
             </form>
         </div>
