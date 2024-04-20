@@ -16,6 +16,7 @@ import { BASE_URL } from '../../App';
 const categories = ['Select category','Groceries', 'Utilities', 'Transportation', 'Entertainment', 'Clothing', 'Other'];
 
 const ExpenseModal = ({ isOpen, onClose, addExpense, data, index }) => {
+
     const [changed, setChanged] = useState(false);
     const [documentId, setDocumentId] = useState(''); // Add state for documentId
     const [expenseTitle, setExpenseTitle] = useState('');
@@ -26,6 +27,9 @@ const ExpenseModal = ({ isOpen, onClose, addExpense, data, index }) => {
     const [customCategory, setCustomCategory] = useState('');
     const expensePostURL = `${BASE_URL}/expenses/addExpenses`;
     const expensePutURL = `${BASE_URL}/expenses/updateExpense`;
+
+    
+
     const handleExpenseChange = (event) => {
         setExpenseTitle(event.target.value);
     };
@@ -45,13 +49,20 @@ const ExpenseModal = ({ isOpen, onClose, addExpense, data, index }) => {
 
 
     useEffect(() => {
-        if( data ) {
+        if( data.category ) {
             setExpenseTitle(data.title);
             setCategory(data.category);
             setPrice(data.price);
             setDate(data.date,true);
             setDocumentId(data._id);
             setExpectedPrice(data.expectedPrice);
+        } else {
+            setExpenseTitle('');
+            setCategory('');
+            setCustomCategory('');
+            setPrice('');
+            setExpectedPrice('');
+            setDate('');
         }
     }, [data])
 
@@ -144,7 +155,7 @@ const ExpenseModal = ({ isOpen, onClose, addExpense, data, index }) => {
         setCustomCategory('');
         setPrice('');
         setExpectedPrice('');
-        setDate('')
+        setDate('');
         onClose();
     };
 
@@ -172,7 +183,7 @@ const ExpenseModal = ({ isOpen, onClose, addExpense, data, index }) => {
         aria-labelledby="expenseModalTitle">
             <div className="modal" onClick={(e) => e.stopPropagation()} role="document">
                 <button className="close-button" onClick={onClose}>×</button>
-                <h2>{data ? 'Edit Expense' : 'Add Expense'}</h2> {/* Change modal title based on whether data is provided */}
+                <h2>{data.category ? 'Edit Expense' : 'Add Expense'}</h2> {/* Change modal title based on whether data is provided */}
                 <form onSubmit={handleSubmit}>
                     <input type="hidden" id="documentId" value={data ? data._id : ''} aria-hidden="true" /> {/* Hidden input field for _id */}
                     <div className="input-group">

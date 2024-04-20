@@ -23,8 +23,8 @@ function Homepage({onLogout}) {
     const [token, setToken] = useState(null);
 
     const openModal = () => {
-        setIsModalOpen(true);
         setExpenseData({}); // Reset expense data when modal is opened
+        setIsModalOpen(true);
     };
 
     useEffect(() => {
