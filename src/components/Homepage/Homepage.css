@@ -1,0 +1,61 @@
+/* Homepage.css */
+
+.table-container {
+    margin: 20px;
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  th, td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  @media (max-width: 600px) {
+    .table-container {
+      margin: 0;
+    }
+  
+    table, th, td {
+      font-size: 0.8em; /* Smaller font size for small screens */
+    }
+  
+    th, td {
+      padding: 5px; /* Less padding to fit smaller screens */
+    }
+  
+    /* Optionally, you could add scrolling to the table on small screens */
+    .table-container {
+      overflow-x: scroll;
+    }
+  
+    table {
+      min-width: 600px; /* Minimum table width */
+    }
+  }
+  
+  /* Homepage.css */
+.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Homepage.css */
+.modal-open {
+  overflow: hidden;
+}
+
+.add-color{
+  color: blue;
+  text-decoration: underline;
+}

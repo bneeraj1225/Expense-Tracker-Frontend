@@ -1,0 +1,169 @@
+/* ExpenseModal.css */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+  }
+  
+  .modal-overlay.open {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal h2 {
+    margin-top: 0;
+  }
+  
+  .modal input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .modal button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modal button:hover {
+    background-color: #fdcfcf;
+  }
+
+.modal select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.modal input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal {
+    width: 90%; /* Take up more width on smaller screens */
+  }
+  
+  .modal input[type="text"],
+  .modal select,
+  .modal input[type="number"] {
+    padding: 15px; /* Larger tap targets for smaller screens */
+    /* margin-bottom: 15px; */
+  }
+
+  .modal button {
+    padding: 15px 30px; /* Larger button for easier interaction */
+  }
+}
+
+/* ExpenseModal.css */
+/* ... other styles ... */
+
+.modal input[type="text"],
+.modal input[type="number"],
+.other-category-input { /* Apply consistent styling to all inputs */
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* ... other styles ... */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal input[type="text"],
+  .modal select,
+  .modal input[type="number"],
+  .other-category-input { /* Make sure the new input is also responsive */
+    padding: 15px; /* Larger tap targets for smaller screens */
+    /* margin-bottom: 15px; */
+  }
+
+  /* ... other styles ... */
+}
+
+/* ... existing styles ... */
+
+.close-button {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+/* Keep the modal size consistent */
+.modal {
+  width: 500px; /* or your preferred fixed width */
+  max-width: 100%; /* ensures responsiveness */
+}
+
+/* Style for the custom category input */
+.input-custom-category {
+  width: calc(100% - 20px); /* Adjust width accounting for padding */
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* ... responsive adjustments ... */
+
+.category-select {
+  color: red;
+  font-size: 14px;
+  display: block;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* Style for the label */
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal-input {
+    padding: 15px; /* Larger tap targets for smaller screens */
+  }
+}

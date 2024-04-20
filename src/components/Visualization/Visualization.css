@@ -1,0 +1,23 @@
+.visualization-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.visualization-container > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align contents to the bottom */
+    height: 100%; /* Ensure each grid cell takes up full height */
+}
+
+.visualization-container > div > div {
+    margin-top: auto; /* Push chart to the bottom */
+}
+
+@media (min-width: 768px) {
+    .visualization-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto;
+    }
+}

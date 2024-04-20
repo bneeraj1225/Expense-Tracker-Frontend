@@ -1,0 +1,92 @@
+
+* {
+    box-sizing: border-box;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Use the full height of the viewport */
+    padding: 20px; /* Add some padding */
+    background-color: black;
+}
+  
+  .signup-form {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* This ensures padding does not affect the width */
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group input {
+    width: 90%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px
+
+  }
+.signup-form .form-group input.error {
+  border-color: red;
+}
+
+.signup-form .form-group .error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.signup-form .form-group input {
+  width: 100%; /* Adjusted the width to match other inputs */
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.signup-form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #0052cc;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signup-form button:hover {
+  background-color: #003d99;
+}
+
+
+.bg-gray-dark-mktg {
+    background-color: #040d21;
+}
+
+
+.logo {
+  font-size: 24px; /* Adjust the font size as needed */
+  font-weight: bold;
+  color: #ffffff95; /* Adjust the color as needed */
+  margin-bottom: 20px; /* Adjust the margin as needed */
+  text-align: center;
+}
+
+.logo span {
+  border-right: 2px solid #333; /* Adjust the border color and width as needed */
+  padding-right: 5px; /* Adjust the padding as needed */
+  animation: typing-animation 0.8s steps(20, end) forwards; /* Adjust the animation duration as needed */
+}
+
+@keyframes typing-animation {
+  from {
+    width: 0;
+  }
+}

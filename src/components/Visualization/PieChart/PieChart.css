@@ -1,0 +1,8 @@
+.pie-chart-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.pie-chart {
+    width: 100%; /* Adjust width to fit two charts side by side */
+}
