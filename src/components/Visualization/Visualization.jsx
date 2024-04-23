@@ -12,6 +12,7 @@ import axios from 'axios';
 import BarChartMonth from './BarChartMonth/BarChartMonth';
 import SpeedometerChart from './SpeedometerChart/SpeedometerChart';
 import { BASE_URL } from '../../App';
+import MonthlyBarChart from './MonthlyBarChart/MonthlyBarChart';
 
 function Visualization({onLogout}) {
     const navigate = useNavigate();
@@ -24,6 +25,8 @@ function Visualization({onLogout}) {
     const [showTokenExpirationAlert, setShowTokenExpirationAlert] = useState(false);
     const [displayAlert, setDisplayAlert] = useState(true);
     const [token, setToken] = useState(null);
+    const [month, setMonth] = useState(-1);
+    const [monthlyExpense, setMonthlyExpense] = useState(0);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -102,7 +105,7 @@ function Visualization({onLogout}) {
         const currentYear = currentDate.getFullYear();
         const currentMonth = currentDate.getMonth() + 1; // January is 0, so add 1
 
-    fetch(`${BASE_URL}/expenses/fetchExpenses/email=${email}`, {
+    fetch(`${BASE_URL}/expenses/fetchExpensesformonth/email=${email}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -116,12 +119,20 @@ function Visualization({onLogout}) {
             return response.json();
         })
         .then(data => {
+            console.log(data.success);
+            if (!data.success) {
+                return;
+            }
+            console.log(data);
             setExpenses([]);
             setExpensesForLineChart([]);
             const categoryExpenses = {}, categoryExpectedExpenses = {};
-            setExpenseData(data);
+            setExpenseData(data.expenses);
+            setMonth(data.month);
+            setMonthlyExpense(data.amount);
             let expensePerMonth = 0, expensePerYear = 0;
-            data.forEach(expense => {
+            let expenses = data.expenses;
+            expenses.forEach(expense => {
                 if (categoryExpenses[expense.category]) {
                     categoryExpenses[expense.category] += expense.price;
                     categoryExpectedExpenses[expense.category] += expense.expectedPrice;
@@ -170,24 +181,27 @@ function Visualization({onLogout}) {
                 expenses.length > 0 ?
                 (
                     <div className="visualization-container">
-                    <div aria-label="Speedometer Chart" role="region">
-                        <SpeedometerChart data={expenses} totalSpentPerMonth={totalSpentPerMonth} totalSpentPerYear={totalSpentPerYear} />
-                    </div>
-                    <div aria-label="Pie Chart" role="region">
-                       <PieChart expenses={expensesForLineChart} />
-                    </div>
-                    <div aria-label="Bar Chart" role="region">
-                        <BarChart data={expensesForLineChart} />
-                    </div>
-                    <div aria-label="Doughnut Chart" role="region">
-                        <DoughnutChart data={expenses} />
-                    </div>
-                    <div aria-label="Line Chart" role="region">
-                        <LineChart data={expensesForLineChart} />
-                    </div>
-                    <div aria-label="Bar Chart Month" role="region">
-                        <BarChartMonth data={expenseData} />
-                    </div>
+                        <div aria-label='Bar Chart Month' role='region'>
+                            <MonthlyBarChart month={month} amount={monthlyExpense} data={expenseData}/>
+                        </div>
+                        <div aria-label="Speedometer Chart" role="region">
+                            <SpeedometerChart data={expenses} totalSpentPerMonth={totalSpentPerMonth} totalSpentPerYear={totalSpentPerYear} />
+                        </div>
+                        <div aria-label="Pie Chart" role="region">
+                        <PieChart expenses={expensesForLineChart} />
+                        </div>
+                        <div aria-label="Bar Chart" role="region">
+                            <BarChart data={expensesForLineChart} />
+                        </div>
+                        <div aria-label="Doughnut Chart" role="region">
+                            <DoughnutChart data={expenses} />
+                        </div>
+                        <div aria-label="Line Chart" role="region">
+                            <LineChart data={expensesForLineChart} />
+                        </div>
+                        <div aria-label="Bar Chart Month" role="region">
+                            <BarChartMonth data={expenseData} />
+                        </div>
                 </div>
                 ) : <h2> There is no data for visualization</h2>}
                 {tokenExpiresIn < 20000 && showTokenExpirationAlert && displayAlert &&(

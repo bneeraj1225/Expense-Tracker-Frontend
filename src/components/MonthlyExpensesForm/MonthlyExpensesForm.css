@@ -1,0 +1,59 @@
+.monthly-expenses-form {
+    display: flex;
+    align-items: center;
+}
+
+.monthly-expenses-form input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.monthly-expenses-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.monthly-expenses-form button:hover {
+    background-color: #0056b3;
+}
+
+
+.monthly-expenses-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.monthly-expenses-form {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.monthly-expenses-form input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+}
+
+.monthly-expenses-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.monthly-expenses-form button:hover {
+    background-color: #0056b3;
+}

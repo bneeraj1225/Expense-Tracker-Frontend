@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import TokenExpirationModal from '../TokenExpirationModal/TokenExpirationModal';
 import { BASE_URL } from '../../App';
+import MonthlyExpensesForm from '../MonthlyExpensesForm/MonthlyExpensesForm';
 
 
 function Homepage({onLogout}) {
@@ -21,6 +22,7 @@ function Homepage({onLogout}) {
     const [showTokenExpirationAlert, setShowTokenExpirationAlert] = useState(false);
     const [displayAlert, setDisplayAlert] = useState(true);
     const [token, setToken] = useState(null);
+    const [amount, setAmount] = useState();
 
     const openModal = () => {
         setExpenseData({}); // Reset expense data when modal is opened
@@ -120,8 +122,11 @@ function Homepage({onLogout}) {
             return response.json();
         })
         .then(data => {
+            console.log(data);
+            setAmount(data.expenseAmount);
+            const expenses = data.expenses;
             // Format dates before setting expenses
-            const formattedExpenses = data.map(expense => ({
+            const formattedExpenses = expenses.map(expense => ({
                 ...expense
             }));
             setExpenses(formattedExpenses);
@@ -299,7 +304,25 @@ function Homepage({onLogout}) {
             setExpenses(prevExpenses => [...prevExpenses, expense]);
         });
     };
-    
+
+    const addMonthlyExpense = (amount) => {
+        const token = localStorage.getItem('token');
+        const userid = localStorage.getItem('userid');
+
+        // Call backend to renew token
+        axios.post(`${BASE_URL}/expenses/addMonthlyExpenses/${userid}`,{amount}, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                alert('Monthly Expense Added/Updated Successfully');
+            })
+            .catch(error => {
+                console.error('Error renewing token:', error);
+            });
+    };
+
 
     return (
         <div>
@@ -307,6 +330,10 @@ function Homepage({onLogout}) {
             <ToastContainer />
             <div>
                 These are the latest budgets that are added,<span className="navbar-item add-color" onClick={openModal}><a href="#">Want to add New Expenses? Click here.</a></span>
+            </div>
+            <div>
+                {/* Add your monthly expenses form */}
+                <MonthlyExpensesForm amount={amount} addMonthlyExpense={addMonthlyExpense} />
             </div>
             <div>
                 If you want to add multiple expenses(make sure to have columns as follows category, title, price, expectedPrice, date).<span className="navbar-item add-color" onClick={handleCSVUpload}><a href="#">To Upload, Click here.</a></span>
