@@ -10,7 +10,9 @@ function MonthlyBarChart({ month, amount, data }) {
     useEffect(() => {
         const total = data.reduce((acc, item) => acc + item.price, 0);
         setUsedAmount(total);
-        setExpenseAmount(amount);
+        if(amount !== null){
+            setExpenseAmount(amount);
+        }
     }, [data, amount]); // Added dependency array to trigger effect on data or amount change
 
     // Chart data
@@ -44,8 +46,8 @@ function MonthlyBarChart({ month, amount, data }) {
 
     return (
         <div>
-            {month !== currentMonth ? (
-                <h2>Submit your expected monthly expenses to view this chart</h2>
+            {(amount === null) ? (
+                <h2 style={{paddingBottom:'25vh'}}>Submit your expected monthly expenses to view this chart</h2>
             ) : (
                 <div>
                     <h2> Used Amount vs Expected Amount for {months[month]} </h2>
