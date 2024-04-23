@@ -46,7 +46,7 @@ function MonthlyBarChart({ month, amount, data }) {
 
     return (
         <div>
-            {(amount === null) ? (
+            {(amount === null || month === -1) ? (
                 <h2 style={{paddingBottom:'25vh'}}>Submit your expected monthly expenses to view this chart</h2>
             ) : (
                 <div>

@@ -23,6 +23,7 @@ function Homepage({onLogout}) {
     const [displayAlert, setDisplayAlert] = useState(true);
     const [token, setToken] = useState(null);
     const [amount, setAmount] = useState();
+    const [currentMonth,setCurrentMonth] = useState(new Date().getMonth() + 1);
 
     const openModal = () => {
         setExpenseData({}); // Reset expense data when modal is opened
@@ -122,8 +123,13 @@ function Homepage({onLogout}) {
             return response.json();
         })
         .then(data => {
-            console.log(data);
-            setAmount(data.expenseAmount);
+            if(data.success === false){
+                return;
+            }
+            if( data.month === currentMonth ){
+                console.log(`${data.month} , ${currentMonth}`);
+                setAmount(data.expenseAmount);
+            }
             const expenses = data.expenses;
             // Format dates before setting expenses
             const formattedExpenses = expenses.map(expense => ({

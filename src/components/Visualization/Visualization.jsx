@@ -27,6 +27,7 @@ function Visualization({onLogout}) {
     const [token, setToken] = useState(null);
     const [month, setMonth] = useState(-1);
     const [monthlyExpense, setMonthlyExpense] = useState(0);
+    const [currentMonth,setCurrentMonth] = useState(new Date().getMonth() + 1);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -128,9 +129,12 @@ function Visualization({onLogout}) {
             setExpensesForLineChart([]);
             const categoryExpenses = {}, categoryExpectedExpenses = {};
             setExpenseData(data.expenses);
-            setMonth(data.month);
-            setMonthlyExpense(data.amount);
-            let expensePerMonth = 0, expensePerYear = 0;
+            if( data.month === currentMonth){
+                console.log(data.month, currentMonth)
+                setMonth(data.month);
+                setMonthlyExpense(data.amount);
+            }
+        let expensePerMonth = 0, expensePerYear = 0;
             let expenses = data.expenses;
             expenses.forEach(expense => {
                 if (categoryExpenses[expense.category]) {

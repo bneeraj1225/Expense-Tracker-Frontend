@@ -13,7 +13,7 @@ function MonthlyExpensesForm({ amount, addMonthlyExpense }) {
     };
 
     useEffect(() => {
-        if (amount !== null) {
+        if (amount !== null && amount !== undefined) {
             setExpenseAmount(amount); // Convert amount to string and set as expenseAmount
         }
     }, [amount]);
@@ -28,7 +28,7 @@ function MonthlyExpensesForm({ amount, addMonthlyExpense }) {
                     onChange={(e) => setExpenseAmount(e.target.value)}
                 />
                 {
-                    amount === null ?
+                    (amount === null || amount === undefined) ?
                     <button type="submit">Submit Expense</button>:
                     <button type="submit">Update Expense</button>
                 }
