@@ -13,10 +13,7 @@ import Visualization from './components/Visualization/Visualization';
 import Profile from './components/Profile/Profile';
 
 export const FRONTEND_BASE_URL = `http://localhost:3000`;
-// export const BASE_URL = `https://expense-tracker-backend-ynae9.ondigitalocean.app`;
-
-export const BASE_URL = `http://localhost:8000`;
-
+export const BASE_URL = `https://expense-tracker-backend-ynae9.ondigitalocean.app`;
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
