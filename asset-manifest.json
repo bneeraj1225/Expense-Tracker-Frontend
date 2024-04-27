@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Expense-Tracker-Frontend/static/css/main.69c2872d.css",
+    "main.js": "/Expense-Tracker-Frontend/static/js/main.96d7e25e.js",
+    "static/js/453.50385a13.chunk.js": "/Expense-Tracker-Frontend/static/js/453.50385a13.chunk.js",
+    "static/media/background-image.jpg": "/Expense-Tracker-Frontend/static/media/background-image.e3cb2c03a1b3e062381d.jpg",
+    "static/media/expense-bg.jpg": "/Expense-Tracker-Frontend/static/media/expense-bg.0dbd6bd74050c18ed3c7.jpg",
+    "index.html": "/Expense-Tracker-Frontend/index.html",
+    "main.69c2872d.css.map": "/Expense-Tracker-Frontend/static/css/main.69c2872d.css.map",
+    "main.96d7e25e.js.map": "/Expense-Tracker-Frontend/static/js/main.96d7e25e.js.map",
+    "453.50385a13.chunk.js.map": "/Expense-Tracker-Frontend/static/js/453.50385a13.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.69c2872d.css",
+    "static/js/main.96d7e25e.js"
+  ]
+}
