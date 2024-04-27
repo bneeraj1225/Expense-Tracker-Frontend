@@ -211,13 +211,13 @@ const ExpenseModal = ({ isOpen, onClose, addExpense, data, index }) => {
                     )}
     
                     <input type="text" value={expenseTitle} onChange={handleExpenseChange} required placeholder="Enter expense title..." />
-                    <input type="number" value={price} onChange={handlePriceChange} required placeholder="Enter expected price..." />
-                    <input type="number" value={expectedPrice} onChange={handleExpectedPriceChange} required placeholder="Enter actual price..." />
+                    <input type="number" name='expectedPrice' value={price} onChange={handlePriceChange} required placeholder="Enter expected price..." />
+                    <input type="number" name='price' value={expectedPrice} onChange={handleExpectedPriceChange} required placeholder="Enter actual price..." />
                    <div className="input-group">
                         <label htmlFor="expenseDate">Expense Purchase Date:</label>
                         <input type="date" max={getTodayDate()} id="expenseDate" value={date} onChange={handleDateChange} required className="modal-input" />
                     </div>
-                    <button type="submit" aria-label={data && data.title ? 'Update' : 'Add'} >{data && data.title ? 'Update' : 'Add'}</button> {/* Change button text based on whether data is provided */}
+                    <button name='expenseButton' type="submit" aria-label={data && data.title ? 'Update' : 'Add'} >{data && data.title ? 'Update' : 'Add'}</button> {/* Change button text based on whether data is provided */}
                 </form>
             </div>
         </div>
