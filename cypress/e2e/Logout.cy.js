@@ -1,4 +1,4 @@
-const FRONTEND_BASE_URL = `http://localhost:3000`;
+const FRONTEND_BASE_URL = `http://104.131.74.55:3000`;
 
 describe('Logout functionality', () => {
     beforeEach(() => {

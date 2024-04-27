@@ -1,4 +1,4 @@
-const FRONTEND_BASE_URL = `http://localhost:3000`;
+const FRONTEND_BASE_URL = `http://104.131.74.55:3000`;
 
 describe('Dashboard Component', () => {
     beforeEach(() => {
@@ -20,12 +20,12 @@ describe('Dashboard Component', () => {
         // Fill out the form with necessary details
         cy.get('input[type="text"]').type('Test Expense');
         cy.get('select').select('Groceries');
-        cy.get('input[type="number"]').eq(0).type('50'); // Price
-        cy.get('input[type="number"]').eq(1).type('45'); // Expected Price
+        cy.get('input[name="price"]').type('50'); // Expected Price
+        cy.get('input[name="expectedPrice"]').type('45'); // Actual Price
         cy.get('input[type="date"]').type('2024-04-19'); // Date
     
         // Submit the form
-        cy.get('button[type="submit"]').click();
+        cy.get('button[name="expenseButton"]').click();
     
         // Ensure the modal closes after submitting the form
         cy.get('.modal-overlay').should('not.be.visible');
