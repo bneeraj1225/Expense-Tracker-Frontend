@@ -28,11 +28,14 @@ function Visualization({onLogout}) {
     const [month, setMonth] = useState(-1);
     const [monthlyExpense, setMonthlyExpense] = useState(0);
     const [currentMonth,setCurrentMonth] = useState(new Date().getMonth() + 1);
+    const [expensesFetched,setExpensesFetched] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            fetchExpenses(token);
+            if(!expensesFetched){
+                fetchExpenses(token);
+            }
             setToken(token);
             const tokenExpirationTime = getTokenExpiration();
             const timeLeft = tokenExpirationTime - Date.now();
@@ -46,7 +49,7 @@ function Visualization({onLogout}) {
 
             return () => clearInterval(interval);
         }
-    }, [token]);
+    }, [expensesFetched, token]);
 
     useEffect(() => {
         // Check if token is expired
@@ -172,6 +175,7 @@ function Visualization({onLogout}) {
             setExpensesForLineChart(dataArrayForLineChart);
             setTotalSpentPerMonth(expensePerMonth);
             setTotalSpentPerYear(expensePerYear);
+            setExpensesFetched(true);
         })
         .catch(error => {
             console.error('Error fetching expenses:', error);

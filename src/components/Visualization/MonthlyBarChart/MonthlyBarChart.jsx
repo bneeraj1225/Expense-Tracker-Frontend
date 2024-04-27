@@ -6,9 +6,18 @@ function MonthlyBarChart({ month, amount, data }) {
     const [expectedAmount, setExpenseAmount] = useState(0);
     const [months,setMonths] = useState({1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December'});
     const [currentMonth,setCurrentMonth] = useState(new Date().getMonth() + 1);
+    const [currentYear ,setCurrentYear] = useState(new Date().getFullYear());
+    
 
     useEffect(() => {
-        const total = data.reduce((acc, item) => acc + item.price, 0);
+        let total = 0;
+        data.forEach((item) => {
+            const itemDate = new Date(item.date);
+            if( (itemDate.getMonth() + 1) === month && itemDate.getFullYear() === currentYear){
+                total += parseFloat(item.price);
+            }
+        });
+
         setUsedAmount(total);
         if(amount !== null){
             setExpenseAmount(amount);

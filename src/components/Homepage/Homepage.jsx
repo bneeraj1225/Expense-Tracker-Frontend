@@ -24,6 +24,7 @@ function Homepage({onLogout}) {
     const [token, setToken] = useState(null);
     const [amount, setAmount] = useState();
     const [currentMonth,setCurrentMonth] = useState(new Date().getMonth() + 1);
+    const [expensesFetched,setExpensesFetched] = useState(false);
 
     const openModal = () => {
         setExpenseData({}); // Reset expense data when modal is opened
@@ -35,7 +36,9 @@ function Homepage({onLogout}) {
         const token = localStorage.getItem('token');
         if (token) {
             setToken(token);
-            fetchExpenses(token);
+            if(!expensesFetched){
+                fetchExpenses(token);
+            }
             const tokenExpirationTime = getTokenExpiration();
             const timeLeft = tokenExpirationTime - Date.now();
             setTokenExpiresIn(timeLeft);
@@ -136,6 +139,7 @@ function Homepage({onLogout}) {
                 ...expense
             }));
             setExpenses(formattedExpenses);
+            setExpensesFetched(true);
         })
         .catch(error => {
             console.error('Error fetching expenses:', error);

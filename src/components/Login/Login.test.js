@@ -3,9 +3,9 @@ import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import axios from 'axios'; // Mock axios
 import Login from './Login';
 import { BASE_URL } from '../../App';
+import { MemoryRouter } from 'react-router-dom';
 
-
-jest.mock('axios'); // Mock axios module
+const onLoginOrSignup = jest.fn();
 
 // Mock useNavigate hook
 jest.mock('react-router-dom', () => ({
@@ -13,19 +13,31 @@ jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(),
 }));
 
+jest.mock('axios'); // Mock axios module
+
 describe('Login component', () => {
+
+  it('renders the component', () => {
+    render(<Login onLoginOrSignup={onLoginOrSignup}/>, { wrapper: MemoryRouter });
+
+    expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
+    expect(screen.getByText('Already have an account?')).toBeInTheDocument();
+  });
+
   it('should display error messages for invalid input', async () => {
-    const { getByText, getByPlaceholderText } = render(<Login />);
+    const { getByText, getByPlaceholderText } =     render(<Login onLoginOrSignup={onLoginOrSignup}/>, { wrapper: MemoryRouter });
+
     // Trigger form submission with empty fields
     fireEvent.click(screen.getByRole('button', { name: 'Login' }));
 
-    // Wait for the error messages to appear
+    // Wait for the asynchronous operation to complete
     await waitFor(() => {
-      expect(getByText('Email is required')).toBeInTheDocument();
-      expect(getByText('Password is required')).toBeInTheDocument();
+      // Assertions for error messages
+      expect(screen.getByText('Email is required')).toBeInTheDocument();
+      expect(screen.getByText('Password is required')).toBeInTheDocument();
     });
   });
-
   it('should handle form submission', async () => {
     const mockResponse = {
       data: {
@@ -39,13 +51,12 @@ describe('Login component', () => {
     const mockNavigate = jest.fn();
     require('react-router-dom').useNavigate.mockReturnValue(mockNavigate);
 
-    const handleSignupMock = jest.fn(); // Mock function for handleSignup
+    const { getByText, getByPlaceholderText } = render(<Login onLoginOrSignup={onLoginOrSignup}/>, { wrapper: MemoryRouter });
 
-    const { getByText, getByPlaceholderText } = render(<Login onLoginOrSignup={handleSignupMock} />); // Pass the mock function
 
     // Fill in the form fields
-    fireEvent.change(getByPlaceholderText('Email'), { target: { value: 'test@example.com' } });
-    fireEvent.change(getByPlaceholderText('Password'), { target: { value: 'password123' } });
+    fireEvent.change(screen.getByPlaceholderText('Email'), { target: { value: 'test@example.com' } });
+    fireEvent.change(screen.getByPlaceholderText('Password'), { target: { value: 'password123' } });
 
     // Trigger form submission
     fireEvent.click(screen.getByRole('button', { name: 'Login' }));
@@ -64,7 +75,7 @@ describe('Login component', () => {
       expect(localStorage.getItem('email')).toBe('test@example.com');
       expect(localStorage.getItem('userid')).toBe('mockUserId');
       expect(mockNavigate).toHaveBeenCalledWith('/homepage');
-      expect(handleSignupMock).toHaveBeenCalled(); // Ensure that the mock function is called
+      expect(onLoginOrSignup).toHaveBeenCalled(); // Ensure that the mock function is called
     });
   });
 });

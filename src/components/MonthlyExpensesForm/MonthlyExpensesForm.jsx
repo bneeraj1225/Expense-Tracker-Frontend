@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './MonthlyExpensesForm.css'; // Assuming you have a CSS file for styles
 
 function MonthlyExpensesForm({ amount, addMonthlyExpense }) {
-    console.log(`Amount: ${amount}`)
     const [expenseAmount, setExpenseAmount] = useState('');
     
     const handleSubmit = (e) => {
         e.preventDefault();
         // Add validation if needed
-        console.log(`expenseAmount: ${expenseAmount}`);
         addMonthlyExpense(parseFloat(expenseAmount)); // Convert to float and pass to the addMonthlyExpense function
     };
 

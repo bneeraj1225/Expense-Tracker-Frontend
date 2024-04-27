@@ -49,7 +49,7 @@ const ExpenseModal = ({ isOpen, onClose, addExpense, data, index }) => {
 
 
     useEffect(() => {
-        if( data.category ) {
+        if( data && data.category ) {
             setExpenseTitle(data.title);
             setCategory(data.category);
             setPrice(data.price);
@@ -183,7 +183,7 @@ const ExpenseModal = ({ isOpen, onClose, addExpense, data, index }) => {
         aria-labelledby="expenseModalTitle">
             <div className="modal" onClick={(e) => e.stopPropagation()} role="document">
                 <button className="close-button" onClick={onClose}>×</button>
-                <h2>{data.category ? 'Edit Expense' : 'Add Expense'}</h2> {/* Change modal title based on whether data is provided */}
+                <h2>{data && data.category ? 'Edit Expense' : 'Add Expense'}</h2> {/* Change modal title based on whether data is provided */}
                 <form onSubmit={handleSubmit}>
                     <input type="hidden" id="documentId" value={data ? data._id : ''} aria-hidden="true" /> {/* Hidden input field for _id */}
                     <div className="input-group">
